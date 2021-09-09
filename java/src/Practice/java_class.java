@@ -1,7 +1,5 @@
 package Practice;
 
-import javax.swing.text.StyledEditorKit;
-
 public class java_class {
     public static void main(String[] args){
     Account my_account = new Account();
