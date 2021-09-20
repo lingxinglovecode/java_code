@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<books>
+    <book sn="dwadwa">
+        <name>时间简史</name>
+        <authoe>霍金</authoe>
+        <price>100</price>
+    </book>
+</books>
