@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="JS_prac_css.css" />
+    <script type="text/javascript">
+        window.onload = function (){
+
+            document.getElementById("btn01").onclick = function (){
+                alert( document.getElementById("bj").innerHTML);
+            };
+
+
+            document.getElementById("btn02").onclick = function (){
+                var list_node = document.getElementsByTagName("li");
+                alert(list_node.length)
+            }
+
+            document.getElementById("btn03").onclick = function (){
+               var genders =  document.getElementsByName("sex");
+               alert(genders.length)
+            }
+
+
+            document.getElementById("btn04").onclick = function (){
+                var node = document.getElementById("city").getElementsByTagName("li");
+                alert(node.length)
+            }
+
+            document.getElementById("btn10").onclick = function (){
+                document.getElementById("username").value= "shit";
+
+
+            }
+
+
+
+
+        }
+
+
+
+
+    </script>
+</head>
+<body>
+    <div class="outer" >
+        <p>
+            你最喜欢哪个城市？
+        </p>
+        <ul id="city" lass="listStyle">
+
+            <li id="bj">北京</li>
+            <li>上海</li>
+            <li>东京</li>
+            <li>首尔</li> <br>
+        </ul>
+<!--        <br>-->
+        <br>
+
+        <p>
+            你喜欢哪款单机游戏?
+        </p>
+        <ul class="listStyle">
+
+            <li>红警</li>
+            <li>实况</li>
+            <li>极品飞车</li>
+            <li>魔兽</li>
+        </ul>
+
+        <br>
+
+
+        <p>你手机的操作系统是?</p>
+        <ul class="listStyle">
+
+            <li>IOS</li>
+            <li>Android</li>
+            <li>Windows Phone</li>
+        </ul>
+
+
+
+
+    </div>
+
+    <div class="outer">
+        <p>
+            性别：
+            <input type="radio" name="sex"/>男
+            <input type="radio" name="sex"/>女
+        </p>
+
+        <p>
+            姓名:
+            <input id="username" type="text"/>
+        </p>
+
+    </div>
+
+    <div id="buttons">
+        <div><button id="btn01">查找#bj节点</button></div>
+        <div><button id="btn02">查找所有li节点</button></div>
+        <div><button id="btn03">查找name=gender的所有节点</button></div>
+        <div><button id="btn04">查找#city下所有li节点</button></div>
+        <div><button id="btn05">返回#city的所有子节点</button></div>
+        <div><button id="btn06">返回#phone的第一个子节点</button></div>
+        <div><button id="btn07">返回#bj的父节点</button></div>
+        <div><button id="btn08">返回#android的前一个兄弟节点</button></div>
+        <div><button id="btn09">返回#username的value属性值</button></div>
+        <div><button id="btn10">设置#username的value属性值</button></div>
+        <div><button id="btn11">返回#bj的文本值</button></div>
+
+
+    </div>
+
+
+
+</body>
+</html>
