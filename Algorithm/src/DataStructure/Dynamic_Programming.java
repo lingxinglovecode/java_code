@@ -27,6 +27,14 @@ public class Dynamic_Programming {
 
     }
 
+
+    @Test
+    public void test3(){
+        int[] nums = {4, 10, 4, 3, 8, 9};
+        solution.lengthOfLIS2(nums);
+
+
+    }
 }
 
 
@@ -190,9 +198,66 @@ class Solution_Dynamic{
     }
 
 
+    //4.最长递增子序列
+    //https://leetcode-cn.com/leetbook/read/top-interview-questions-medium/xwhvq3/
+
+    //方法1：求出每一个元素作为子序列的最后一个值的时候对应的最长子序列的长度
+    public int lengthOfLIS(int[] nums) {
+        int[] results = new int[nums.length];
+        Arrays.fill(results,1);
+        int maxResult = 1;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if ( nums[i]>nums[j] ){
+                    results[i] = Math.max(results[j]+1,results[i]);
+                    maxResult = Math.max(maxResult,results[i]);
+                }
+
+            }
+        }
+        return maxResult;
+    }
+
+    //方法2：贪心+二分查找
+    //借鉴答案题解
+    // https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/zui-chang-shang-sheng-zi-xu-lie-by-leetcode-soluti/
+
+    public int binarySearch(int left,int right,int[] nums,int target){
+        int pos = 0;
+        while(left<=right){
+            int mid = (left+right)/2;
+            if ( target>nums[mid] ){
+                left = mid+1;
+                pos = mid;
+            }else{
+                right = mid-1;
+            }
+        }
+        return pos+1;
+    }
+
+    public int lengthOfLIS2(int[] nums) {
+        int[] lengthAndNum = new int[nums.length+1];
+        int maxLength = 1;
+        lengthAndNum[1] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            if ( nums[i]>lengthAndNum[maxLength] ){
+                maxLength += 1;
+                lengthAndNum[maxLength] = nums[i];
+            }else {
+
+                int idx = binarySearch(1,maxLength,lengthAndNum,nums[i]);
+                lengthAndNum[idx] = nums[i];
+
+            }
+
+        }
+        return maxLength;
 
 
 
 
+
+    }
 
 }

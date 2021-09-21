@@ -22,7 +22,7 @@ public abstract class BaseDao {
     private QueryRunner queryRunner = new QueryRunner();
 
 
-    /*
+    /**
      * @Description: 用来执行insert/update/delete语句
      * @param:
      * @return int 返回-1表示执行失败，其他表示影响的行数
