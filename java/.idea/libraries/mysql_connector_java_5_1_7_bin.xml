@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="mysql-connector-java-5.1.7-bin">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../JDBC/mysql-connector-java-5.1.7-bin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://E:/Develop/1.尚硅谷全套JAVA教程--基础必备（67.32GB）/尚硅谷_宋红康_JDBC核心技术/3-资料/3-资料/2-驱动/01-MySQL驱动/mysql-connector-java-5.1.7/src" />
+    </SOURCES>
+  </library>
+</component>
