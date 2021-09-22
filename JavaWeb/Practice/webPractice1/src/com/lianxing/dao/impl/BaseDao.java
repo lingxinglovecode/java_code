@@ -61,7 +61,7 @@ public abstract class BaseDao {
 
         Connection connection = JdbcUtils.getConnection();
         try {
-            return queryRunner.query(sql, new BeanHandler<T>(type), args);
+            return queryRunner.query(connection,sql, new BeanHandler<T>(type), args);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

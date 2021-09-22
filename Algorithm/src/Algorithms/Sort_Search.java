@@ -1,4 +1,4 @@
-package DataStructure;
+package Algorithms;
 
 import org.junit.Test;
 
