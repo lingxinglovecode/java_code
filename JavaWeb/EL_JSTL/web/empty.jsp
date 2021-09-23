@@ -21,6 +21,7 @@
     request.setAttribute("key2", "request");
     session.setAttribute("key2", "session");
     application.setAttribute("key2", "application");
+
 %>
 
 <%
