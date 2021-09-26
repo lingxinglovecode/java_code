@@ -36,5 +36,12 @@
 <c:forEach items="${ requestScope.map }" var="entry">
     <h1>${entry.key} = ${entry.value}</h1>
 </c:forEach>
+
+    <form action="http://localhost:8080/EL_JSTL/fileUploadServlet" enctype="multipart/form-data" method="post">
+        用户名：<input type="text" name="username">
+        头像：<input type="File" name="photo">
+        <input type="submit" value="上传">
+
+    </form>
 </body>
 </html>
