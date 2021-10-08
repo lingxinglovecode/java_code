@@ -33,6 +33,16 @@
         </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>BookServlet</servlet-name>
+        <servlet-class>com.lianxing.web.BookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookServlet</servlet-name>
+        <url-pattern>/manager/bookServlet</url-pattern>
+    </servlet-mapping>
+
+
 
 </web-app>
 

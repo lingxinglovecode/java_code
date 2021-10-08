@@ -1,6 +1,7 @@
 package com.lianxing.service;
 
 import com.lianxing.pojo.Book;
+import com.lianxing.pojo.Page;
 
 import java.util.List;
 
@@ -22,4 +23,5 @@ public interface BookService {
     public List<Book> queryBooks();
 
 
+    Page<Book> page(int pageNo, int pageSize);
 }

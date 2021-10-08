@@ -3,8 +3,10 @@ package com.lianxing.service.impl;
 import com.lianxing.dao.BookDao;
 import com.lianxing.dao.impl.BookDaoImpl;
 import com.lianxing.pojo.Book;
+import com.lianxing.pojo.Page;
 import com.lianxing.service.BookService;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**
@@ -38,5 +40,35 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> queryBooks() {
         return bookDao.queryBooks();
+    }
+
+    @Override
+    public Page<Book> page(int pageNo, int pageSize) {
+        Page<Book> page = new Page<Book>();
+
+
+        page.setPageSize(pageSize);
+
+        //求总记录数
+        Integer pageTotalCount = bookDao.queryForPageTotalCount();
+        page.setPageTotalCount(pageTotalCount);
+        //求总页数
+        Integer pageTotal = pageTotalCount / pageSize;
+
+
+
+
+        if ( pageTotalCount % pageSize >0 ){
+            pageTotal ++;
+        }
+        page.setPageTotal(pageTotal);
+
+        page.setPageNo(pageNo);
+        //设置当前页数据
+        int begin = (page.getPageNo()-1) * pageSize;
+        List<Book> items = bookDao.queryForPageItems(begin,pageSize);
+        page.setItems(items);
+
+        return page;
     }
 }

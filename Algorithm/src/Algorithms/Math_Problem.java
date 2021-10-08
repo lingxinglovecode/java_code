@@ -3,6 +3,7 @@ package Algorithms;
 import org.junit.Test;
 
 import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -22,8 +23,11 @@ public class Math_Problem {
         char a = "a".charAt(0);
         System.out.println((int)a);
 
-        mathSolution.myPow3(2,-2147483648);
 
+//        mathSolution.divide(-2147483648,-1);
+//        System.out.println(mathSolution.mul(12,9));
+
+        mathSolution.fractionToDecimal(10,3);
     }
 }
 
@@ -217,12 +221,123 @@ class MathSolution {
         }
         return ans;
 
+    }
+
+
+    //问题5：两数相除
+    //https://leetcode-cn.com/leetbook/read/top-interview-questions-medium/xwp6vi/
+    public int divide(int dividend, int divisor) {
+        long x = dividend;
+        long y = divisor;
+        int sign=1;
+        if( (x>0&&y<0) ||(x<0&&y>0)) sign=-1;
+        x = Math.abs(x);
+        y = Math.abs(y);
+
+        long left = 0;
+        long right = x;
+        while (left<right){
+            long mid = left + (right-left+1)>>1;
+            if ( mid*y<x ){
+                left = mid;
+            }else {
+                right = mid-1;
+            }
+        }
+
+        long ans = left*sign;
+        if (ans > Integer.MAX_VALUE || ans < Integer.MIN_VALUE) return Integer.MAX_VALUE;
+
+        return (int)ans;
+
+    }
+    //快速乘法，将被乘数以二进制的思想进行运算
+    public long mul(long x,long y ){
+        long result=0;
+        while (y!=0){
+            if ( (y&1)==1 ){
+                result = result+x;
+            }
+            x += x;
+            y = y>>1;
+        }
+        return result;
 
 
     }
 
 
+    //问题6：分数到小数
+    public String fractionToDecimal(int numerator, int denominator) {
+        if(numerator==0){
+            return "0";
+        }
+        String result="";
+        if ( numerator<0 ^ denominator<0 ){
+            result += "-";
+        }
+        Long dividend = Math.abs( (long) numerator);
+        Long divisor = Math.abs( (long) denominator);
+        result = result + dividend/divisor;
+        long reminder = dividend%divisor;
+        if ( reminder == 0 ){
+            return result;
+        }
+        result += ".";
+        HashMap<Long,Integer> map = new HashMap<>();
+        while (reminder!=0){
+            if ( map.containsKey(reminder) ){
+                int mid = map.get(reminder);
+                String left = result.substring(0,mid);
+                String right = result.substring(mid,result.length());
+                result = left + "("+right + ")";
+                return result;
+
+            }
+            map.put(reminder,result.length());
+            reminder *= 10;
+            result = result + reminder/divisor;
+            reminder = reminder%divisor;
+        }
+        return result;
+
+    }
+    //开发中建议使用StringBuffer或者StringBuilder效率更高
+    public String fractionToDecimal2(int numerator, int denominator) {
+        if ( numerator==0 ){
+            return "0";
+        }
+        StringBuilder result = new StringBuilder();
+        if ( numerator<0 ^ denominator<0 ){
+            result.append("-");
+        }
+        Long dividend = Math.abs( (long) numerator);
+        Long divisor = Math.abs( (long) denominator);
+        result.append(dividend/divisor);
+        long reminder = dividend%divisor;
+        if ( reminder == 0 ){
+            return result.toString();
+        }
+        result.append(".");
+        HashMap<Long,Integer> map = new HashMap<>();
+        while (reminder!=0){
+            if ( map.containsKey(reminder) ){
+                result.insert(map.get(reminder),"(");
+                result.append(")");
+                return result.toString();
+
+            }
+            map.put(reminder,result.length());
+            reminder *= 10;
+            result = result.append(reminder/divisor);
+            reminder = reminder%divisor;
+        }
+        return result.toString();
 
 
+
+
+
+    }
 
 }

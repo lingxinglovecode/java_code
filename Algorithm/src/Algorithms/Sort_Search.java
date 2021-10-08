@@ -2,6 +2,8 @@ package Algorithms;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @author lianxing
  * @description
@@ -30,6 +32,22 @@ public class Sort_Search {
 
 class Sort_solution{
 
+    public int searchNum(int[] nums, int target){
+        Arrays.sort(nums);
+        int left = 0;
+        int right = nums.length-1;
+
+        while (left < right){
+            int mid = (left + right)/2;
+            if ( nums[mid] < target){
+                left = mid + 1;
+            }else {
+                right = mid;
+            }
+        }
+        return nums[ left ];
+
+    }
 
 //----------------------------中级算法--------------------------------
 

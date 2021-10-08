@@ -15,8 +15,16 @@ import java.lang.reflect.Method;
  * @create 2021-09-24 16:47
  */
 public abstract class BaseServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        doPost(req,resp);
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
         try {
             //获取action业务鉴别字符串，利用反射的方式调用方法
