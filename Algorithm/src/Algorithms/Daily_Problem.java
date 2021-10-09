@@ -131,13 +131,25 @@ class DailySolution{
     }
     //解法2：字符串哈希
 
-    int N = (int)1e5+10, P=13131313;
+    int N = (int)1e5+10, P=131313;
     int[] h = new int[N] , p = new int[N];
     public List<String> findRepeatedDnaSequences3(String s) {
-
-
-
-
+        ArrayList<String> result = new ArrayList<String>();
+        p[0] = 1;
+        for (int i = 1; i <= s.length(); i++) {
+            h[i] = h[i-1]*P + s.charAt(i-1);
+            p[i] = p[i-1]*P;
+        }
+        int code;
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 1; i+10-1 <= s.length(); i++) {
+            int j = i + 10 -1;
+            code = h[j] - h[i-1]*p[j-i+1];
+            int times = hashMap.getOrDefault(code, 0) + 1;
+            hashMap.put(code, times);
+            if ( times==2 ) result.add(s.substring(i-1,i-1+10));
+        }
+        return result;
     }
 
 
