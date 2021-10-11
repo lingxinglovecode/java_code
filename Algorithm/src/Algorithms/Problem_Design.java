@@ -41,6 +41,14 @@ public class Problem_Design {
         randomizedSet.getRandom();
 
     }
+
+    @Test
+    public void test3(){
+        SummaryRanges2 summaryRanges = new SummaryRanges2();
+        summaryRanges.addNum(1);
+
+
+    }
 }
 
 
@@ -290,5 +298,135 @@ class RandomizedSet2{
         int index = (int) (Math.random() * list.size());
         return list.get(index);
     }
+
+}
+
+class SummaryRanges {
+
+    ArrayList<Integer> data = new ArrayList<Integer>();
+    public SummaryRanges() {
+
+    }
+
+    public void addNum(int val) {
+        data.add(val);
+    }
+
+    public int[][] getIntervals() {
+        this.data.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1-o2;
+            }
+        });
+        ArrayList<int[]> list = new ArrayList<>();
+        int start = 0;
+        int end = 0;
+        while (start<this.data.size()){
+            int[] interval = {this.data.get(start),this.data.get(end)};
+            while ( end+1 < this.data.size() && this.data.get(end+1) <= this.data.get(end)+1 ){
+                end = end + 1;
+                interval[1] = this.data.get(end);
+            }
+            list.add(interval);
+            start = end+1;
+            end = start;
+        }
+        return list.toArray(new int[list.size()][]);
+
+    }
+}
+
+
+class SummaryRanges2 {
+    List<int[]> list = new ArrayList<int[]>();
+    int[] head = {-10,-10}, tail = {10010,10010};
+
+    public SummaryRanges2() {
+        list.add(head);
+        list.add(tail);
+    }
+
+    public void addNum(int val) {
+
+        int l = 0;
+        int r = list.size()-1;
+        while (l < r) {
+            int mid = l+r+1 >> 1;
+            if ( list.get(mid)[0]>val ){
+                r = mid - 1;
+            }else {
+                l = mid;
+            }
+        }
+        int[] prev = list.get(l);
+        int[] next = list.get(l+1);
+        if ( val>=prev[0] && val<=prev[1]){ // || val>=next[0] && val<=next[1]
+            return ;
+        }else if (prev[1]+1 == val && next[0] == val+1){
+            prev[1] = next[1];
+            list.remove(next);
+        }else if(prev[1]+1 == val){
+            prev[1] = val;
+        }else if(next[0]-1 == val){
+            next[0] = val;
+        }else {
+            list.add(l+1,new int[]{val,val});
+        }
+
+    }
+
+    public int[][] getIntervals() {
+        int n = list.size();
+        int[][] result = new int[n-2][2];
+        for (int i = 1; i < n-1; i++) {
+            result[i-1] = list.get(i);
+        }
+        return result;
+    }
+
+}
+
+class SummaryRanges3{
+    TreeSet<int[]> treeSet = new TreeSet<>((a,b) -> a[0]-b[0]);
+    int[] head = new int[]{-10, -10}, tail = new int[]{10010, 10010};
+    public SummaryRanges3() {
+        treeSet.add(head);
+        treeSet.add(tail);
+    }
+
+    public void addNum(int val) {
+        int[] cur = new int[]{val, val};
+        int[] prev = treeSet.floor(cur);
+        int[] next = treeSet.ceiling(cur);
+        if ( val>=prev[0] && val<=prev[1]){ //|| (next[0] <= val && val <= next[1]
+            return ;
+        }else if (prev[1]+1 == val && next[0] == val+1){
+            prev[1] = next[1];
+            treeSet.remove(next);
+        }else if(prev[1]+1 == val){
+            prev[1] = val;
+        }else if(next[0]-1 == val){
+            next[0] = val;
+        }else {
+            treeSet.add(cur);
+        }
+    }
+    public int[][] getIntervals() {
+
+        int n = treeSet.size();
+        int[][] result = new int[n-2][2];
+        Iterator<int[]> iterator = treeSet.iterator();
+        iterator.next();
+        for (int i = 0; i < n-2; i++) {
+            result[i] = iterator.next();
+        }
+        return result;
+
+
+    }
+
+
+
 
 }

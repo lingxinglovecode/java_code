@@ -13,7 +13,7 @@ public class String_Algorithm {
     @Test
     public void test1(){
         System.out.println(solution.minDistance("intention","execution"));
-
+        System.out.println(solution.numberToWords(12345678));
     }
 
 }
@@ -43,6 +43,46 @@ class StringSolution {
         }
 
         return word1.length()+word2.length()-2*max;
+    }
+
+
+
+    String[] numStr_small = {"Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine",
+            "Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
+    String[] numStr_medium = {"","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"};
+    String[] numStr_large = {"","Billion","Million","Thousand",""};
+
+    String num2Str(int x){
+        String result = "";
+        if ( x>=100 ){
+            int num = x/100;
+            result = result+numStr_small[num]+" Hundred ";
+            x %= 100;
+        }
+        if ( x>=20 ){
+            int num2 = x/10;
+            result = result+numStr_medium[num2]+" ";
+            x %= 10;
+        }
+        if ( x>0){
+            result = result+numStr_small[x]+" ";
+        }
+        return result;
+
+    }
+    public String numberToWords(int num) {
+        if ( num==0 ) return "Zero";
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 1,j= (int) 1e9; i <= 4; i++,j /= 1000) {
+            if ( num<j ) continue;
+            int temp = num/j;
+            sb.append(num2Str(temp));
+            sb.append(numStr_large[i]+" ");
+            num %= j;
+        }
+
+        return  sb.toString().trim();
 
 
 
