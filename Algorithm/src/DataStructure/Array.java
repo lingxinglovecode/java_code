@@ -69,6 +69,14 @@ public class Array {
     }
 
 
+    @Test
+    public void spiralOrderTest(){
+        int[][] matrix = {{2, 5, 8},{4, 0, -1}};
+        Solution solution = new Solution();
+        solution.spiralOrder(matrix);
+
+    }
+
 
 }
 
@@ -474,8 +482,108 @@ class Solution{
     //根据这两个数组最终置相应位置为0，其实是方法1和方法2的折中
 
 
+    //------------------------------------------高级算法---------------------------------------------
+
+    //1.螺旋矩阵
+    //https://leetcode-cn.com/leetbook/read/top-interview-questions-hard/xw3ng2/
+
+    //方法1：直接遍历，控制上下左右四个方向
+    public List<Integer> spiralOrder(int[][] matrix){
+        int row = matrix.length;
+        int col = matrix[0].length;
+        List result = new ArrayList<Integer>();
+
+        int right_row = 0, right_col_start =0 ,right_col_end = col-1;
+        int down_col = col-1, down_row_start = right_row+1, down_row_end = row-1 ;
+        int left_row = row-1,left_col_start = down_col-1,left_col_end = 0;
+        int up_col = left_col_end, up_row_start = left_row+1,up_row_end = right_row-1;
+
+        while(true) {
+
+            if ( right_col_end >= right_col_start ) {
+                //right
+                for (int j = right_col_start; j <= right_col_end; j++) {
+                    result.add(matrix[ right_row ][ j ]);
+                }
+            }else break;
+
+            down_col = right_row == 0 ? col - 1 : down_col - 1;
+            down_row_start = right_row + 1;
+            down_row_end = right_row == 0 ? row - 1 : down_row_end - 1;
+            if ( down_row_end >= down_row_start ) {
+                for (int i = down_row_start; i <= down_row_end; i++) {
+                    result.add(matrix[ i ][ down_col ]);
+                }
+            }else break;
+
+            left_row = right_row == 0 ?row-1:left_row-1;
+            left_col_start = down_col-1;
+            left_col_end = right_row == 0?0:left_col_end+1;
+            if ( left_col_start >= left_col_end ) {
+                for (int j = left_col_start; j >= left_col_end; j--) {
+                    result.add(matrix[ left_row ][ j ]);
+                }
+            }else break;
+
+            up_col = left_col_end;
+            up_row_start = left_row-1;
+            up_row_end = right_row+1;
+            if ( up_row_end <= up_row_start ) {
+                for (int i = up_row_start; i >= up_row_end; i--) {
+                    result.add(matrix[ i ][ up_col ]);
+                }
+            }else break;
+
+            right_row = right_row+1;
+            right_col_start = up_col+1;
+            right_col_end = down_col-1;
+        }
+
+
+        return result;
+
+    }
+    //同方法一，优化之后
+    public List<Integer> spiralOrder2(int[][] matrix) {
+        int row = matrix.length;
+        int col = matrix[ 0 ].length;
+        int left = 0, right = col - 1, up = 0, down = row - 1;
+
+        List<Integer> list = new ArrayList<Integer>();
+        while (true) {
+            //right
+            if ( left > right ) break;
+            for (int j = left; j <= right; j++) {
+                list.add(matrix[ up ][ j ]);
+            }
+
+            up++;
+            //down
+            if ( up > down ) break;
+            for (int i = up; i <= down; i++) {
+                list.add(matrix[ i ][ right ]);
+            }
+            //left
+            right--;
+            if ( left > right ) break;
+            for (int j = right; j >= left; j--) {
+                list.add(matrix[ down ][ j ]);
+
+            }
+
+            //up
+            down--;
+            if ( down < up ) break;
+            for (int i = down; i >= up; i--) {
+                list.add(matrix[ i ][ left ]);
+            }
+            left++;
+        }
+        return list;
+
+
+    }
 
 
 }
-
 
