@@ -8,7 +8,9 @@ import java.util.List;
  * @create 2021-10-02 14:56
  */
 public class Page<T> {
-    public static final Integer PAGE_SIZE  = 2;
+    public static final Integer PAGE_SIZE  = 4;
+
+    private String url;
 
     //当前页码
     private Integer pageNo;
@@ -16,6 +18,15 @@ public class Page<T> {
     private Integer pageSize = PAGE_SIZE;
     //总页码
     private Integer pageTotal;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     //总记录数
     private Integer pageTotalCount;
     //当前页数据
@@ -24,7 +35,8 @@ public class Page<T> {
     @Override
     public String toString() {
         return "Page{" +
-                "pageNo=" + pageNo +
+                "url='" + url + '\'' +
+                ", pageNo=" + pageNo +
                 ", pageSize=" + pageSize +
                 ", pageTotal=" + pageTotal +
                 ", pageTotalCount=" + pageTotalCount +
