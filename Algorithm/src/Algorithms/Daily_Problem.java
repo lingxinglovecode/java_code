@@ -1,5 +1,7 @@
 package Algorithms;
 
+import org.junit.Test;
+
 import java.util.*;
 
 /**
@@ -8,8 +10,34 @@ import java.util.*;
  * @create 2021-10-06 8:27
  */
 public class Daily_Problem {
+    DailySolution daySolution = new DailySolution();
+    @Test
+    public void test1(){
+        TreeNode root = new TreeNode(1);
+        TreeNode left = new TreeNode(2);
+        TreeNode right = new TreeNode(3);
+        root.left = left;
+        root.right = right;
+        int a = daySolution.kthSmallest2(root,3);
 
+    }
 
+    public static void main(String[] args) {
+
+    }
+}
+
+class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode() {}
+      TreeNode(int val) { this.val = val; }
+      TreeNode(int val, TreeNode left, TreeNode right) {
+          this.val = val;
+          this.left = left;
+          this.right = right;
+        }
 }
 
 class DailySolution{
@@ -153,6 +181,97 @@ class DailySolution{
     }
 
 
+    /**
+     * @Description: 二叉搜索树中第K小的元素
+     * @param: null
+     * @return * @return null
+     * @author lianxing
+     * @date 2021/10/17 10:55
+    */
+    public int kthSmallest(TreeNode root, int k) {
+        String stringTravel = travelPreOrder(root);
+        String[] stingList = stringTravel.split(",");
+        List<Integer> myList = new ArrayList<Integer>();
+        for(String s:stingList){
+            myList.add(Integer.parseInt(s));
+        }
+//        myList.sort(new Comparator<Integer>() {
+//            @Override
+//            public int compare(Integer o1, Integer o2) {
+//                return o1-o2;
+//            }
+//        });
+        myList.sort((Integer o1,Integer o2) -> o1-o2); //使用lambda表达式
+        return myList.get(k-1);
+    }
+
+    public String travelPreOrder(TreeNode root){
+        if ( root == null ){
+            return "";
+        }
+        return travelPreOrder(root.left) + root.val +","+ travelPreOrder(root.right);
+
+
+    }
+
+
+
+
+    public int kthSmallest2(TreeNode root, int k) {
+        Deque<TreeNode> stack = new LinkedList<>();
+        int count=0;
+        stack.push(root);
+        TreeNode curNode = root;
+        while (!stack.isEmpty()){
+
+
+            while ( curNode.left!=null ){
+                curNode = curNode.left;
+                stack.push(curNode);
+            }
+            TreeNode temp = stack.pop();
+            count++;
+            if ( count==k ){
+                return temp.val;
+            }
+            if ( temp.right!=null ){
+                curNode =temp.right;
+                stack.push(curNode);
+            }
+
+        }
+        return 0;
+
+
+    }
+
+
+
+    //范围求和II
+    public int maxCount(int m, int n, int[][] ops) {
+        int minRow = Integer.MAX_VALUE;
+        int minCol = Integer.MAX_VALUE;
+        if ( ops.length==0 ){return m*n;}
+        for (int i = 0; i < ops.length; i++) {
+            if ( ops[i][0]<minRow ){
+                minRow = ops[i][0];
+            }
+            if ( ops[i][1]<minCol ){
+                minCol = ops[i][1];
+            }
+
+        }
+        return minRow*minCol;
+    }
+
+    public int maxCount2(int m, int n, int[][] ops) {
+
+        for (int[] op:ops){
+            m = Math.min(op[0],m);
+            n = Math.min(op[0],n);
+        }
+        return m*n;
+    }
 
 
 }

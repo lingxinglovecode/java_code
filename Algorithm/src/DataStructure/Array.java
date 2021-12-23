@@ -13,7 +13,7 @@ public class Array {
 //        Solution solution = new Solution();
 //
 //    }
-
+    public static Solution solution = new Solution();
 
     @Test
     public void arrayTest1(){
@@ -74,6 +74,17 @@ public class Array {
         int[][] matrix = {{2, 5, 8},{4, 0, -1}};
         Solution solution = new Solution();
         solution.spiralOrder(matrix);
+
+    }
+
+
+    @Test
+    public void fourCountTest(){
+        int[] num1 = {-1,-1};
+        int[] num2 = {-1,1};
+        int[] num3 = {-1,1};
+        int[] num4 = {1,-1};
+        solution.fourSumCount(num1,num2,num3,num4);
 
     }
 
@@ -581,6 +592,59 @@ class Solution{
         }
         return list;
 
+
+    }
+
+
+
+    //2.四数相加
+    //https://leetcode-cn.com/leetbook/read/top-interview-questions-hard/xwqm6c/
+
+    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+        Map<Integer, Integer> hashMap1 =  new HashMap<>();
+        int count = 1;
+        for (int i = 0; i < nums1.length; i++) {
+            for(int j = 0; j < nums2.length; j++){
+                hashMap1.put(count++,nums1[i]+nums2[j]);
+            }
+        }
+
+        Map<Integer, Integer> hashMap2 =  new HashMap<>();
+        for (int i = 0; i < nums3.length; i++) {
+            for(int j = 0; j < nums4.length; j++){
+                Integer valueCount = hashMap2.getOrDefault(nums3[i] + nums4[j], 0)+1;
+                hashMap2.put(nums3[i]+nums4[j],valueCount);
+            }
+        }
+
+
+        int result = 0;
+        for(int i=1;i<=nums1.length*nums2.length; i++){
+            if (hashMap2.containsKey(-hashMap1.get(i))  ){
+                result = result+hashMap2.get(-hashMap1.get(i));
+            }
+        }
+        return result;
+
+
+    }
+
+    //简化一下写法
+    public int fourSumCount2(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+
+        HashMap<Integer,Integer> hashMap = new HashMap<Integer,Integer>();
+        for (int i:nums1){
+            for (int j:nums2){
+                hashMap.put(i+j, hashMap.getOrDefault(i+j,0)+1);
+            }
+        }
+        int result = 0;
+        for (int i:nums3){
+            for (int j:nums4){
+                result += hashMap.getOrDefault(-(i+j),0);
+            }
+        }
+        return result;
 
     }
 
