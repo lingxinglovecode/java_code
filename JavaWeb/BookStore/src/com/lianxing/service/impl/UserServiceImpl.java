@@ -14,7 +14,7 @@ import javax.xml.crypto.dsig.keyinfo.X509IssuerSerial;
  */
 public class UserServiceImpl implements UserService {
 
-    private UserDao userDao = new UserDaoImpl();
+    private static  UserDao userDao = new UserDaoImpl();
 
 
     @Override

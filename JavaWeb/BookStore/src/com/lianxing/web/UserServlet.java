@@ -1,5 +1,6 @@
 package com.lianxing.web;
 
+import com.google.gson.Gson;
 import com.lianxing.pojo.User;
 import com.lianxing.service.UserService;
 import com.lianxing.service.impl.UserServiceImpl;
@@ -11,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 
 /**
  * @author lianxing
@@ -44,10 +49,24 @@ public class UserServlet extends BaseServlet {
             req.setAttribute("username",username);
             req.getRequestDispatcher("/pages/user/login.jsp").forward(req,resp);
         }else {
+            //保存用户登录之后的信息到session域中
+            req.getSession().setAttribute("user",loginUser);
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req,resp);
         }
 
+
+
 }
+    protected void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+        //销毁session中的用户登录信息
+        req.getSession().invalidate();
+        //重定向向首页
+        resp.sendRedirect(req.getContextPath());
+
+
+    }
 
 
     /**
@@ -60,13 +79,17 @@ public class UserServlet extends BaseServlet {
      */
     protected void regist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        String token = (String)req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
+        // 删除 Session 中的验证码
+        req.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
+
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String email = req.getParameter("email");
 
         User user = WebUtils.copyParamToBean(req.getParameterMap(),new User());
         String code = req.getParameter("code");
-        if ("abcde".equalsIgnoreCase(code) ){
+        if (token!=null && token.equalsIgnoreCase(code) ){
             if ( userService.existsUsername(username) ){
 //                System.out.println("用户名"+username+"已存在！");
                 req.setAttribute("msg","用户名"+username+"已存在！");
@@ -117,5 +140,21 @@ public class UserServlet extends BaseServlet {
 //
 //
 //    }
+    protected void ajaxExistUsername(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String username = req.getParameter("username");
+        boolean existsUsername = userService.existsUsername(username);
+
+        //返回结果封装为map对象
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("existsUsername", existsUsername);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(resultMap);
+        resp.getWriter().write(json);
+
+
+
+    }
 
 }

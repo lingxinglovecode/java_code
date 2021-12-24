@@ -15,7 +15,7 @@ import java.util.List;
  * @create 2021-09-26 11:03
  */
 public class BookServiceImpl implements BookService {
-    private BookDao bookDao = new BookDaoImpl();
+    private  static BookDao bookDao = new BookDaoImpl();
 
     @Override
     public void addBook(Book book) {
@@ -56,17 +56,37 @@ public class BookServiceImpl implements BookService {
         Integer pageTotal = pageTotalCount / pageSize;
 
 
-
-
-        if ( pageTotalCount % pageSize >0 ){
-            pageTotal ++;
-        }
         page.setPageTotal(pageTotal);
 
         page.setPageNo(pageNo);
         //设置当前页数据
         int begin = (page.getPageNo()-1) * pageSize;
         List<Book> items = bookDao.queryForPageItems(begin,pageSize);
+        page.setItems(items);
+
+        return page;
+    }
+
+    @Override
+    public Page<Book> pageByPrice(int pageNo, int pageSize, int min, int max) {
+        Page<Book> page = new Page<Book>();
+
+
+        page.setPageSize(pageSize);
+
+        //求总记录数
+        Integer pageTotalCount = bookDao.queryForPageTotalCountByPrice(min,max);
+        page.setPageTotalCount(pageTotalCount);
+        //求总页数
+        Integer pageTotal = pageTotalCount / pageSize;
+
+
+        page.setPageTotal(pageTotal);
+
+        page.setPageNo(pageNo);
+        //设置当前页数据
+        int begin = (page.getPageNo()-1) * pageSize;
+        List<Book> items = bookDao.queryForPageItemsByPrice(begin,pageSize,min,max);
         page.setItems(items);
 
         return page;

@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/BookStore/BookStore.iml" filepath="$PROJECT_DIR$/BookStore/BookStore.iml" />
       <module fileurl="file://$PROJECT_DIR$/CSS/CSS.iml" filepath="$PROJECT_DIR$/CSS/CSS.iml" />
       <module fileurl="file://$PROJECT_DIR$/EL_JSTL/EL_JSTL.iml" filepath="$PROJECT_DIR$/EL_JSTL/EL_JSTL.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Filter/Filter.iml" filepath="$PROJECT_DIR$/Filter/Filter.iml" />
       <module fileurl="file://$PROJECT_DIR$/HTML/HTML.iml" filepath="$PROJECT_DIR$/HTML/HTML.iml" />
       <module fileurl="file://$PROJECT_DIR$/JS/JS.iml" filepath="$PROJECT_DIR$/JS/JS.iml" />
       <module fileurl="file://$PROJECT_DIR$/JSP/JSP.iml" filepath="$PROJECT_DIR$/JSP/JSP.iml" />
@@ -13,6 +14,8 @@
       <module fileurl="file://$PROJECT_DIR$/Servlet/Servlet.iml" filepath="$PROJECT_DIR$/Servlet/Servlet.iml" />
       <module fileurl="file://$PROJECT_DIR$/XML&amp;Tomcat/XML&amp;Tomcat.iml" filepath="$PROJECT_DIR$/XML&amp;Tomcat/XML&amp;Tomcat.iml" />
       <module fileurl="file://$PROJECT_DIR$/jQuery/jQuery.iml" filepath="$PROJECT_DIR$/jQuery/jQuery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/json_ajax_i18n/json_ajax_i18n.iml" filepath="$PROJECT_DIR$/json_ajax_i18n/json_ajax_i18n.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mycookie/mycookie.iml" filepath="$PROJECT_DIR$/mycookie/mycookie.iml" />
       <module fileurl="file://$PROJECT_DIR$/Practice/webPractice1/webPractice1.iml" filepath="$PROJECT_DIR$/Practice/webPractice1/webPractice1.iml" />
     </modules>
   </component>

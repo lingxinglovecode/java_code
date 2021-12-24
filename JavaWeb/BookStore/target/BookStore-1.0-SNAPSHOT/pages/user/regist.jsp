@@ -8,7 +8,34 @@
 		<%@include file="/pages/common/head.jsp"%>
 		<script type="text/javascript">
 			// 页面加载完成之后
+
+
+
 			$(function () {
+
+				$("#username").blur(function () {
+					//获取用户名
+					var username = this.value;
+					$.getJSON("http://localhost:8080/BookStore/userServlet","action=ajaxExistUsername&username="+username,function (data) {
+						// alert(data.existsUsername);
+						if (data.existsUsername){
+							$("span.errorMsg").text("用户名已存在！");
+						}else{
+							$("span.errorMsg").text("用户名可用！");
+						}
+
+					})
+
+				});
+
+				//给验证码的图片绑定单击事件
+				$("#code_img").click(function () {
+					//在事件相应的function中有一个this对象，这个this对象是当前正在响应事件的dom对象
+					//src属性表示图片的路径，可读可写
+					this.src = "${basePath}kaptcha.jpg";
+				})
+
+
 				// 给注册绑定单击事件
 				$("#sub_btn").click(function () {
 					// 验证用户名：必须由字母，数字下划线组成，并且长度为5到12位
@@ -139,7 +166,7 @@
 									<br />
 									<label>验证码：</label>
 									<input class="itxt" type="text" style="width: 150px;" id="code" name="code"/>
-									<img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">
+									<img id="code_img"; alt="" src="kaptcha.jpg" style="float: right; margin-right: 40px;width:80px;height:30px;">
 									<br />
 									<br />
 									<input type="submit" value="注册" id="sub_btn" />

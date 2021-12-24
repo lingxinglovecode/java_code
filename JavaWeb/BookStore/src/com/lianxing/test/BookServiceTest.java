@@ -1,6 +1,7 @@
 package com.lianxing.test;
 
 import com.lianxing.pojo.Book;
+import com.lianxing.pojo.Page;
 import com.lianxing.service.BookService;
 import com.lianxing.service.impl.BookServiceImpl;
 import org.junit.Test;
@@ -49,6 +50,14 @@ public class BookServiceTest {
     @Test
     public void page() {
         System.out.println(bookService.page(1,4));
+
+    }
+
+    @Test
+    public void pageByPrice() {
+//        System.out.println(bookService.page(1,4));
+        Page<Book> page1 = bookService.pageByPrice(0, 4, 10, 50);
+        System.out.println(page1);
 
     }
 }

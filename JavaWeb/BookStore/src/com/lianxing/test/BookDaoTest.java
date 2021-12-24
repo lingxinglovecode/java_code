@@ -3,6 +3,7 @@ package com.lianxing.test;
 import com.lianxing.dao.BookDao;
 import com.lianxing.dao.impl.BookDaoImpl;
 import com.lianxing.pojo.Book;
+import com.lianxing.pojo.Page;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -54,9 +55,25 @@ public class BookDaoTest {
     }
 
     @Test
+    public void queryForPageTotalCountByPrice() {
+
+        System.out.println(bookDao.queryForPageTotalCountByPrice(10,50));
+    }
+
+    @Test
     public void queryForPageItems() {
         System.out.println(bookDao.queryForPageItems(4,8));
 
+
+    }
+
+    @Test
+    public void queryForPageItemsByPrice() {
+//        System.out.println(bookDao.queryForPageItemsByPrice(0,8,10,50));
+        List<Book> list = bookDao.queryForPageItemsByPrice(0,4,10,50);
+        for(Book book:list){
+            System.out.println(book);
+        }
 
     }
 

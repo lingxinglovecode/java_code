@@ -23,7 +23,8 @@
 			<img class="logo_img" alt="" src="../../static/img/logo.gif" >
 			<span class="wel_word">图书管理系统</span>
 			<%--静态包含manager管理模块菜单--%>
-			<%@ include file="/pages/common/menu.jsp"%>
+			<%@ include file="/pages/common/menu.jsp"%>伟大
+
 	</div>
 	
 	<div id="main">

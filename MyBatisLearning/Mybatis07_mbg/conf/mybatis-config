@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="dbconfig.properties"></properties>
+
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <typeAliases>
+<!--        <typeAlias type="com.lianxing.bean.Employee" alias="emp"></typeAlias>-->
+
+        <package name="com.lianxing.bean"></package>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}" />
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 5、databaseIdProvider：支持多数据库厂商的；
+		 type="DB_VENDOR"：VendorDatabaseIdProvider
+		 	作用就是得到数据库厂商的标识(驱动getDatabaseProductName())，mybatis就能根据数据库厂商标识来执行不同的sql;
+		 	MySQL，Oracle，SQL Server,xxxx
+	  -->
+    <databaseIdProvider type="DB_VENDOR">
+        <!-- 为不同的数据库厂商起别名 -->
+        <property name="MySQL" value="mysql"/>
+        <property name="Oracle" value="oracle"/>
+        <property name="SQL Server" value="sqlserver"/>
+    </databaseIdProvider>
+
+
+    <mappers>
+<!--        <mapper resource="EmployeeMapper.xml"/>-->
+<!--        <mapper class="com.lianxing.dao.EmployeeMapperAnnotation"></mapper>-->
+
+<!--        包扫描的方式，为包内的配置文件和接口建立映射关系-->
+        <package name="com.lianxing.dao"/>
+    </mappers>
+
+<!--    <mappers>-->
+
+<!--         <mapper resource="mybatis/mapper/EmployeeMapper.xml"/>-->
+<!--         <mapper class="com.atguigu.mybatis.dao.EmployeeMapperAnnotation"/>-->
+
+<!--        &lt;!&ndash; 批量注册： &ndash;&gt;-->
+<!--        <package name="com.atguigu.mybatis.dao"/>-->
+<!--    </mappers>-->
+</configuration>

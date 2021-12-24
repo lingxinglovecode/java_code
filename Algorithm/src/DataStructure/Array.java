@@ -11,7 +11,7 @@ import java.util.*;
 public class Array {
 //    public static void main(String[] args) {
 //        Solution solution = new Solution();
-//
+
 //    }
     public static Solution solution = new Solution();
 
@@ -345,7 +345,63 @@ class Solution{
 
 
     }
-//6.两个数组的交集
+
+
+    //6.两个数组的交集
+    //排序之后分别移动两个指针进行遍历
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        List<Integer> result = new ArrayList<Integer> ();
+        int i =0;
+        int j = 0;
+        while (i<nums1.length && j<nums2.length){
+            if ( nums1[i]==nums2[j] ){
+                result.add(nums1[i]);
+                i++;
+                j++;
+            }
+            else if ( nums1[i]>nums2[j]){
+                j++;
+            }
+            else if ( nums1[i]<nums2[j]){
+                i++;
+            }
+        }
+        int[] res = new int[result.size()];
+        for (int m = 0;m < result.size(); m++){
+            res[m] = result.get(m);
+        }
+        return res;
+    }
+
+
+    //哈希表存储元素及其出现次数，在遍历第二个数组的时候比较是否相同
+    public int[] intersect2(int[] nums1, int[] nums2) {
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < nums1.length; i++) {
+            hashMap.put(nums1[i],hashMap.getOrDefault(nums1[i],0)+1);
+        }
+
+        ArrayList<Integer> integers = new ArrayList<>();
+        for (int j = 0; j < nums2.length; j++) {
+            if ( hashMap.containsKey(nums2[j]) && hashMap.get(nums2[j])>0){
+                integers.add(nums2[j]);
+                hashMap.put(nums2[j],hashMap.get(nums2[j])-1);
+            }
+        }
+        int[] result = new int[integers.size()];
+        for (int i = 0; i < integers.size(); i++) {
+            result[i] = integers.get(i);
+        }
+        return result;
+
+
+
+    }
+
+
+
 
 
 

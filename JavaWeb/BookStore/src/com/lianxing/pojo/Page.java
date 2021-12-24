@@ -72,6 +72,9 @@ public class Page<T> {
     }
 
     public void setPageTotal(Integer pageTotal) {
+        if ( pageTotalCount % pageSize >0 ){
+            pageTotal ++;
+        }
         this.pageTotal = pageTotal;
     }
 

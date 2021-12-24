@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--配置User类-->
+    <bean id="user" class="com.lianxing.spring5.User" ></bean>
+
+
+    <bean id="book" class="com.lianxing.spring5.Book">
+<!--        name:属性名称-->
+<!--        value：向属性中注入的值-->
+        <property name="bname" value="你好"></property>
+        <property name="bauthor" value="匿名"></property>
+<!--        <property name="address" >-->
+<!--            <null/>-->
+<!--        </property>-->
+
+<!--        属性中包含特殊符号：-->
+<!--        方法1进行转义-->
+<!--        方法2把带特殊符号的内容写的CDATA中-->
+        <property name="address" >
+            <value><![CDATA[<<南京>>]]></value>
+        </property>
+    </bean>
+
+<!--    有参构造注入属性-->
+    <bean id="orders" class="com.lianxing.spring5.Orders">
+        <constructor-arg name="oname" value="电脑"></constructor-arg>
+        <constructor-arg name="address" value="china"></constructor-arg>
+    </bean>
+
+
+<!--    <bean id="book" class="com.lianxing.spring5.Book" p:bname="炒土豆" p:bauthor="牛牛">-->
+<!--    </bean>-->
+
+
+    <bean id="userService" class="com.lianxing.spring5.service.UserService">
+<!--        name:类其中的属性名字-->
+<!--        ref：注入的类的名字，下面配置的-->
+        <property name="userDao" ref="userDaoImpl"></property>
+        
+    </bean>
+    <bean id="userDaoImpl" class="com.lianxing.spring5.dao.UserDaoImpl"></bean>
+
+
+</beans>

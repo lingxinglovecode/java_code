@@ -26,6 +26,9 @@ public abstract class BaseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
+
+        //解决相应的中文乱码
+        resp.setContentType("text/html;charset=UTF-8");
         try {
             //获取action业务鉴别字符串，利用反射的方式调用方法
             Method method = this.getClass().getDeclaredMethod(action,HttpServletRequest.class,HttpServletResponse.class);
@@ -33,6 +36,7 @@ public abstract class BaseServlet extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException(e);//异常抛给filter过滤器
         }
 
 //        if ( "login".equals(action) ){

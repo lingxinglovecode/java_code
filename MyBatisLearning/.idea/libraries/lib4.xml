@@ -1,0 +1,34 @@
+<component name="libraryTable">
+  <library name="lib4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/mybatis-ehcache-1.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/spring-core-4.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/mybatis-3-mybatis-3.4.1.zip!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/com.springsource.org.aopalliance-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/log4j.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/taglibs-standard-spec-1.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/spring-aop-4.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/slf4j-api-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/spring-jdbc-4.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/spring-orm-4.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/taglibs-standard-impl-1.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/spring-aspects-4.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/mysql-connector-java-5.1.37-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/spring-context-4.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/mybatis-spring-1.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/ehcache-core-2.6.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/spring-beans-4.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/slf4j-log4j12-1.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/spring-expression-4.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/spring-webmvc-4.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/spring-tx-4.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/spring-web-4.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/com.springsource.net.sf.cglib-2.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/commons-logging-1.1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Mybatis06_ssm/lib/mybatis-3.4.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
