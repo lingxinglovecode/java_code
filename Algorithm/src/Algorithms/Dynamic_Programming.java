@@ -33,6 +33,8 @@ public class Dynamic_Programming {
         int[] nums = {4, 10, 4, 3, 8, 9};
         solution.lengthOfLIS2(nums);
 
+        int [] friends = {49,110,13,39,45,104,9,114,86,72,13,24,10,77,103,85,9,21,66,25};
+        solution.numFriendRequests5(friends);
 
     }
 }
@@ -254,10 +256,98 @@ class Solution_Dynamic{
         }
         return maxLength;
 
-
-
-
-
     }
+
+
+    //适龄的朋友
+
+    //暴力查找 超时
+    public int numFriendRequests(int[] ages) {
+        int request = 0;
+        for (int i = 0; i < ages.length; i++) {
+            for (int j = 0; j < ages.length; j++) {
+                if(i==j) continue;
+                if ((ages[i]<=0.5*ages[j]+7) || (ages[i]>ages[j]) || (ages[i]>100)&&(ages[j]<100)){
+                    continue;
+                }
+                request++;
+            }
+        }
+        return request;
+    }
+
+    //先排序然后在一定范围内查找
+    public int numFriendRequests2(int[] ages) {
+        Arrays.sort(ages);
+        int res = 0;
+        for (int i = 0; i < ages.length; i++) {
+            for (int j = i-1; (j>=0) && (ages[j]>0.5*ages[i]+7); j--) {
+                if (ages[j]==ages[i]){
+                    res = res+2;
+                }else{
+                    res++;
+                }
+
+            }
+        }
+        return res;
+    }
+
+    //找到符合范围的左边界和右边界，然后统计个数
+    public int numFriendRequests3(int[] ages) {
+        Arrays.sort(ages);
+        int res = 0;
+        for (int l=0,r=0,i=0; i < ages.length; i++) {
+            l = i;
+            r = i;
+            while((l-1>=0) && (ages[l-1]>0.5 * ages[i]+7)){l--;}
+            if((r+1<ages.length)&&(ages[r+1]>0.5 * ages[i]+7)){
+                while ((r+1<ages.length) && (ages[r+1]==ages[i])){r++;}
+            }
+            res = res + r-l;
+        }
+        return res;
+    }
+
+    //统计边界 但是从开始0的位置向上统计
+    public int numFriendRequests4(int[] ages) {
+        Arrays.sort(ages);
+        int res = 0;
+        for (int i = 0,l=0,r=0; i < ages.length; i++) {
+            while (l<i && !check(ages[i],ages[l])) l++;
+            r = i;
+            while (r<ages.length && check(ages[i],ages[r])) r++;
+            if(r>l) res = res+r-l-1;
+        }
+        return res;
+    }
+
+    boolean check(int x,int y){
+        if(y<=0.5*x+7) return false;
+        if(y>x) return false;
+        return true;
+    }
+
+    //采用桶排序的思想
+    public int numFriendRequests5(int[] ages) {
+        int N = 120;
+        int[] bucket = new int[N+1];
+        for(int age:ages){bucket[age]++;}
+        for (int i = 1; i < N+1; i++) {
+            bucket[i] = bucket[i]+bucket[i-1];
+        }
+        int res=0;
+        for (int i = 0; i < ages.length; i++) {
+            int max = ages[i];
+            int min = (int) (0.5*ages[i])+7;
+            if (max>min){
+                res += bucket[max]-bucket[min]-1;
+            }
+        }
+        return res;
+    }
+
+
+
 
 }

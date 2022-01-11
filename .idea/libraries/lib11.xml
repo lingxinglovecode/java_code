@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lib11">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JavaWeb/Practice/webPractice1/web/WEB-INF/lib/druid-1.1.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JavaWeb/Practice/webPractice1/web/WEB-INF/lib/mysql-connector-java-5.1.7-bin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JavaWeb/Practice/webPractice1/web/WEB-INF/lib/druid-1.1.9-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JavaWeb/Practice/webPractice1/web/WEB-INF/lib/commons-dbutils-1.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JavaWeb/Practice/webPractice1/web/WEB-INF/lib/commons-dbutils-1.3-sources.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
